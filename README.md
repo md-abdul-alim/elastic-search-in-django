@@ -6,7 +6,7 @@ Before running this project, ensure that Elasticsearch is running on your local 
 
 ## Installation and Setup
 
-Visit the [Elasticsearch Downloads](https://www.elastic.co/downloads/elasticsearch) page to get started. There are two methods to run Elasticsearch:
+Visit the [Elasticsearch Downloads](https://www.elastic.co/downloads/elasticsearch) or [Elasticsearch pypi](https://pypi.org/project/elasticsearch/) page to get started. There are two methods to run Elasticsearch:
 
 ### Method 1: Using Docker (Recommended)
 
