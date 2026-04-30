@@ -11,6 +11,11 @@ class ProductDocument(Document):
             'number_of_shards': 1,
             'number_of_replicas': 0
         }
+    
+    brand = fields.ObjectField(properties={
+        'name': fields.KeywordField(),
+        'description': fields.TextField(),
+    })
 
     class Django:
         model = Product
@@ -19,7 +24,6 @@ class ProductDocument(Document):
             "description",
             "category",
             "price",
-            "brand",
             "sku",
             "thumbnail",
         ]

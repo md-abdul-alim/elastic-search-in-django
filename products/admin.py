@@ -8,5 +8,5 @@ class ProductAdmin(admin.ModelAdmin):
 
 @admin.register(Brand)
 class BrandAdmin(admin.ModelAdmin):
-    list_display = ('brand_name',)
-    search_fields = ('brand_name',)
+    list_display = ('name',)
+    search_fields = ('name',)
