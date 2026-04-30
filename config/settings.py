@@ -108,7 +108,7 @@ STATIC_URL = 'static/'
 
 ELASTICSEARCH_DSL={
     'default': {
-        'hosts': 'https://localhost:9200',
+        'hosts': 'http://localhost:9200',
         'http_auth': ('elastic', 'szojsZ5E')
     }
 }
