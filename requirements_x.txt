@@ -1,0 +1,17 @@
+cd elastic-start-local && ./start.sh && cd -
+
+🌐 Open your browser at http://localhost:5601
+
+   Username: elastic
+   Password: szojsZ5E
+
+🔌 Elasticsearch API endpoint: http://localhost:9200
+🔑 API key: U0RLajM1MEJzaEVOVUhDX2VBR0Y6Nm4wektKWGUxUlFyRElLZjA3aHBLdw==
+
+Learn more at https://github.com/elastic/start-local
+
+
+
+Understanding cloud computing
+
+introduction to shell

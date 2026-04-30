@@ -1,3 +1,12 @@
 from django.contrib import admin
+from .models import Product, Brand
 
-# Register your models here.
+@admin.register(Product)
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ('title', 'brand', 'price')
+    search_fields = ('title', 'brand__name')
+
+@admin.register(Brand)
+class BrandAdmin(admin.ModelAdmin):
+    list_display = ('brand_name',)
+    search_fields = ('brand_name',)
