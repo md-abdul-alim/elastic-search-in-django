@@ -34,3 +34,84 @@ Once the container is running, verify the installation by visiting:
    elasticsearch.bat
    ```
 6. Verify the installation by visiting [http://localhost:9200/](http://localhost:9200/)
+
+## Data Indexing
+
+To manage data in Elasticsearch, use the following Django management commands:
+
+```bash
+# Create a new index
+python manage.py search_index --create
+
+# Populate the index with existing data
+python manage.py search_index --populate
+
+# Delete the index
+python manage.py search_index --delete
+
+# Rebuild the index (delete and recreate)
+python manage.py search_index --rebuild
+```
+
+## Elasticsearch API
+
+Retrieve indexed data through the Elasticsearch API:
+
+```
+GET http://localhost:9200/products/_search?q=%22product%22
+```
+
+**Sample API Response:**
+```json
+{
+  "_shards": {
+    "total": 1,
+    "successful": 1,
+    "skipped": 0,
+    "failed": 0
+  },
+  "hits": {
+    "total": {
+      "value": 2,
+      "relation": "eq"
+    },
+    "max_score": 0.19856803,
+    "hits": [
+      {
+        "_index": "products",
+        "_id": "1",
+        "_score": 0.19856803,
+        "_source": {
+          "brand": {
+            "name": "Brand two",
+            "description": "brand description two"
+          },
+          "title": "Product 1",
+          "description": "Product description",
+          "category": "cat 1",
+          "price": 100,
+          "sku": "brand-one-product-one",
+          "thumbnail": "https://www.facebook.com"
+        }
+      },
+      {
+        "_index": "products",
+        "_id": "2",
+        "_score": 0.18232156,
+        "_source": {
+          "brand": {
+            "name": "Brand one",
+            "description": "brand description"
+          }
+        }
+      }
+    ]
+  }
+}
+```
+
+## Kibana Dashboard & Data Visualization
+
+Access Kibana at [http://localhost:5601/](http://localhost:5601/) to visualize and manage your Elasticsearch indices.
+
+![Kibana Dashboard](./kibana_dashboard.png)
