@@ -6,8 +6,12 @@ def search_product(request):
 
     query = request.GET.get('search', '')
     results = ProductDocument.search().query(
-        "match",
-        title=query,
+        "bool",
+        should=[
+            {"match": {"title": query}},
+            {"term": {"brand.name": query}} #exact match for brand name
+        ],
+        minimum_should_match=1
     )
 
     results = results.execute()
