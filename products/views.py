@@ -4,9 +4,8 @@ from elasticsearch_dsl.query import MultiMatch
 from products.documents import ProductDocument
 
 def search_product(request):
-
     query = request.GET.get('search', '')
-    '''
+
     results = ProductDocument.search().query(
         "bool",
         should=[
@@ -15,9 +14,10 @@ def search_product(request):
             {"term": {"brand.name": query}} # Exact match, requires precise brand name
         ],
         minimum_should_match=1
-    ).sort('_score', '-price') # Sort by relevance score and then by price in descending order
-    '''
+    ).sort('_score', '-price').extra(size=30) # Sort by relevance score and then by price in descending order
 
+
+    '''
     results = ProductDocument.search().query(
         MultiMatch(
             query=query,
@@ -25,6 +25,7 @@ def search_product(request):
             fuzziness='AUTO' # Enable fuzzy search to tolerate typos and variations
         )
     ).collapse(field='sku') # collapse ensure only one result per unique SKU, preventing duplicates in the search results. Which works like distinct in SQL
+    '''
 
     results = results.execute()
 
