@@ -1,23 +1,30 @@
 from django.shortcuts import render
 from django.http import JsonResponse
-
+from products.documents import ProductDocument
 
 def search_product(request):
+    products = []
+
+    query = request.GET.get('search', '')
+    results = ProductDocument.search().query(
+        "match",
+        title=query,
+    )
+
+    results = results.execute()
+
+    for hit in results:
+        products.append({
+            'id': hit.meta.id,
+            'title': hit.title,
+            'description': hit.description,
+            'brand': hit.brand.to_dict() if hit.brand else None,
+            'price': hit.price,
+        })
 
     data = {
         'status': 'success',
         'message': 'Product search successful',
-        'products': [
-            {
-                'id': 1,
-                'name': 'Product 1',
-                'price': 10.99
-            },
-            {
-                'id': 2,
-                'name': 'Product 2',
-                'price': 19.99
-            }
-        ]
+        'products': products
     }
     return JsonResponse(data)
