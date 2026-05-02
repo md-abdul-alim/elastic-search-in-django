@@ -8,8 +8,9 @@ def search_product(request):
     results = ProductDocument.search().query(
         "bool",
         should=[
-            {"match": {"title": query}},
-            {"term": {"brand.name": query}} #exact match for brand name
+            # {"match": {"title": query}}, # Fuzzy search, tolerates typos and variations
+            {"match": {"title": {"query": query, "fuzziness": "AUTO"}}}, # Fuzzy search with automatic fuzziness
+            {"term": {"brand.name": query}} # Exact match, requires precise brand name
         ],
         minimum_should_match=1
     )
